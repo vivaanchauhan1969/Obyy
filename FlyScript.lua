@@ -134,3 +134,28 @@ bg:remove()
 if connection ~= nil then
 connection:disconnect()
 end
+if moveconnect ~= nil then
+moveconnect:disconnect()
+end
+if upconnect ~= nil then
+upconnect:disconnect()
+end
+while s == 0 do
+	wait()
+	if #flow > 0 then
+		flow = checktable(flow, true)
+		local i
+		for i = 1,#flow do
+			flow[i].Transparency = flow[i].Transparency + rs
+			if flow[i].Transparency >= 1 then flow[i]:remove() end
+		end
+	end
+end
+end)
+while true do
+	wait()
+	if s == 1 then
+		return
+	end
+end
+script:remove()

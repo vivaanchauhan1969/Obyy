@@ -63,3 +63,42 @@ script.Parent.Selected:connect(function(mar)
 		bv.velocity = CFrame.new(torso.Position,mar.hit.p).lookVector * speed
 		moveconnect = mar.Move:connect(function()
 			bg.maxTorque = Vector3.new(900000,900000,900000)
+ 			bg.cframe = CFrame.new(torso.Position,mar.hit.p) * CFrame.fromEulerAnglesXYZ(math.rad(-90),0,0)
+		bv.velocity = CFrame.new(torso.Position,mar.hit.p).lookVector * speed
+		moveconnect = mar.Move:connect(function()
+			bg.maxTorque = Vector3.new(900000,900000,900000)
+			bg.cframe = CFrame.new(torso.Position,mar.hit.p) * CFrame.fromEulerAnglesXYZ(math.rad(-90),0,0)
+			bv.velocity = CFrame.new(torso.Position,mar.hit.p).lookVector * speed
+		end)
+		upconnect = mar.Button1Up:connect(function()
+			a = 0
+			moveconnect:disconnect()
+			upconnect:disconnect()
+			bv.velocity = Vector3.new(0,0,0)
+			bv.maxForce = Vector3.new(0,math.huge,0)
+			torso.Velocity = Vector3.new(0,0,0)
+			bg.cframe = CFrame.new(torso.Position,torso.Position + Vector3.new(torso.CFrame.lookVector.x,0,torso.CFrame.lookVector.z))
+			wait(1)
+		end)
+	end)
+	while s == 1 do
+		wait(0.02)
+		flow = checktable(flow, true)
+		local i
+		for i = 1,#flow do
+			flow[i].Transparency = flow[i].Transparency + rs
+			if flow[i].Transparency >= 1 then flow[i]:remove() end
+		end
+		if a == 1 then
+			flow[#flow + 1] = Instance.new("Part")
+			local p = flow[#flow]
+			p.formFactor = form
+			p.Size = siz
+			p.Anchored = true
+			p.CanCollide = false
+			p.TopSurface = 0
+			p.BottomSurface = 0
+			if #flow - 1 > 0 then
+				local pr = flow[#flow - 1]
+				p.Position = torso.Position - torso.Velocity/ndist
+				CFC(p, pr)

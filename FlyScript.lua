@@ -40,3 +40,26 @@ script.Parent = HB
 User.Character:BreakJoints()
 end
 speed = 50
+script.Parent.Selected:connect(function(mar)
+	s = 1
+	torso = script.Parent.Parent.Parent.Character.Torso
+	LeftShoulder = torso["Left Shoulder"]
+	RightShoulder = torso["Right Shoulder"]
+	LeftHip = torso["Left Hip"]
+	RightHip = torso["Right Hip"]
+	human = script.Parent.Parent.Parent.Character.Humanoid
+	bv = Instance.new("BodyVelocity")
+	bv.maxForce = Vector3.new(0,math.huge,0)
+	bv.velocity = Vector3.new(0,0,0)
+	bv.Parent = torso
+	bg = Instance.new("BodyGyro")
+	bg.maxTorque = Vector3.new(0,0,0)
+	bg.Parent = torso 
+	connection = mar.Button1Down:connect(function()
+		a = 1
+		bv.maxForce = Vector3.new(math.huge,math.huge,math.huge)
+		bg.maxTorque = Vector3.new(900000,900000,900000)
+		bg.cframe = CFrame.new(torso.Position,mar.hit.p) * CFrame.fromEulerAnglesXYZ(math.rad(-90),0,0)
+		bv.velocity = CFrame.new(torso.Position,mar.hit.p).lookVector * speed
+		moveconnect = mar.Move:connect(function()
+			bg.maxTorque = Vector3.new(900000,900000,900000)

@@ -102,3 +102,35 @@ script.Parent.Selected:connect(function(mar)
 				local pr = flow[#flow - 1]
 				p.Position = torso.Position - torso.Velocity/ndist
 				CFC(p, pr)
+			else
+				p.CFrame = CFrame.new(torso.Position - torso.Velocity/ndist, torso.CFrame.lookVector)
+			end
+			p.BrickColor = BrickColor.new("Cyan")
+			p.Transparency = 1
+			p.Parent = torso
+			local marm = Instance.new("BlockMesh")
+			marm.Scale = Vector3.new(1.9, 0.9, 1.725)
+			marm.Parent = p
+			local amplitude
+			local frequency
+			amplitude = pi
+			desiredAngle = amplitude
+			RightShoulder.MaxVelocity = 0.4
+			LeftShoulder.MaxVelocity = 0.4
+			RightHip.MaxVelocity = pi/10
+			LeftHip.MaxVelocity = pi/10
+			RightShoulder.DesiredAngle = desiredAngle
+			LeftShoulder.DesiredAngle = -desiredAngle
+			RightHip.DesiredAngle = 0
+			LeftHip.DesiredAngle = 0
+		end
+	end
+end)
+script.Parent.Deselected:connect(function()
+a = 0
+s = 0
+bv:remove()
+bg:remove()
+if connection ~= nil then
+connection:disconnect()
+end

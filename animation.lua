@@ -152,3 +152,61 @@ script.ChildRemoved:connect(scriptChildModified)
 for name, fileList in pairs(animNames) do 
 configureAnimationSet(name, fileList)
 end
+
+local toolAnim = "None"
+local toolAnimTime = 0
+
+local jumpAnimTime = 0
+local jumpAnimDuration = 0.3
+
+local toolTransitionTime = 0.1
+local fallTransitionTime = 0.3
+local jumpMaxLimbVelocity = 0.75
+
+
+function stopAllAnimations()
+local oldAnim = currentAnim
+
+if (emoteNames[oldAnim] ~= nil and emoteNames[oldAnim] == false) then
+oldAnim = "idle"
+end
+
+currentAnim = ""
+currentAnimInstance = nil
+if (currentAnimKeyframeHandler ~= nil) then
+currentAnimKeyframeHandler:disconnect()
+end
+
+if (currentAnimTrack ~= nil) then
+currentAnimTrack:Stop()
+currentAnimTrack:Destroy()
+currentAnimTrack = nil
+end
+return oldAnim
+end
+
+function setAnimationSpeed(speed)
+if speed ~= currentAnimSpeed then
+currentAnimSpeed = speed
+currentAnimTrack:AdjustSpeed(currentAnimSpeed)
+end
+end
+
+function keyFrameReachedFunc(frameName)
+if (frameName == "End") then
+
+local repeatAnim = currentAnim
+-- return to idle if finishing an emote
+if (emoteNames[repeatAnim] ~= nil and emoteNames[repeatAnim] == false) then
+repeatAnim = "idle"
+end
+
+local animSpeed = currentAnimSpeed
+playAnimation(repeatAnim, 0.0, Humanoid)
+setAnimationSpeed(animSpeed)
+end
+end
+
+for name, fileList in pairs(animNames) do 
+configureAnimationSet(name, fileList)
+end

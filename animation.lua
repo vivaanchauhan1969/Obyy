@@ -289,3 +289,45 @@ setAnimationSpeed(speed / 14.5)
 end
 pose = "Running"
 else
+playAnimation("idle", 0.1, Humanoid)
+pose = "Standing"
+end
+end
+function onDied()
+pose = "Dead"
+end
+function onJumping()
+playAnimation("jump", 0.1, Humanoid)
+jumpAnimTime = jumpAnimDuration
+pose = "Jumping"
+end
+function onClimbing(speed)
+playAnimation("climb", 0.1, Humanoid)
+setAnimationSpeed(speed / 12.0)
+pose = "Climbing"
+end
+function onGettingUp()
+pose = "GettingUp"
+end
+function onFreeFall()
+if (jumpAnimTime <= 0) then
+playAnimation("fall", fallTransitionTime, Humanoid)
+end
+pose = "FreeFall"
+end
+function onFallingDown()
+pose = "FallingDown"
+end
+function onSeated()
+pose = "Seated"
+end
+function onPlatformStanding()
+pose = "PlatformStanding"
+end
+function onSwimming(speed)
+if speed>0 then
+pose = "Running"
+else
+pose = "Standing"
+end
+end

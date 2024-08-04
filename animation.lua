@@ -86,3 +86,27 @@ cheer = {
 { id = "http://www.roblox.com/asset/?id=129423030", weight = 10 } 
 },
 }
+local dances = {"dance1", "dance2", "dance3"}
+local emoteNames = { wave = false, point = false, dance1 = true, dance2 = true, dance3 = true, laugh = false, cheer = false}
+
+function configureAnimationSet(name, fileList)
+if (animTable[name] ~= nil) then
+for _, connection in pairs(animTable[name].connections) do
+connection:disconnect()
+end
+end
+animTable[name] = {}
+animTable[name].count = 0
+animTable[name].totalWeight = 0
+animTable[name].connections = {}
+local config = script:FindFirstChild(name)
+if (config ~= nil) then
+print("Loading anims " .. name)
+table.insert(animTable[name].connections, config.ChildAdded:connect(function(child) configureAnimationSet(name, fileList) end))
+table.insert(animTable[name].connections, config.ChildRemoved:connect(function(child) configureAnimationSet(name, fileList) end))
+local idx = 1
+for _, childPart in pairs(config:GetChildren()) do
+      if (childPart:IsA("Animation")) then
+table.insert(animTable[name].connections, childPart.Changed:connect(function(property) configureAnimationSet(name, fileList) end))
+animTable[name][idx] = {}
+animTable[name][idx].anim = childPart

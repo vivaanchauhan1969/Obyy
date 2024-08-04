@@ -110,3 +110,45 @@ for _, childPart in pairs(config:GetChildren()) do
 table.insert(animTable[name].connections, childPart.Changed:connect(function(property) configureAnimationSet(name, fileList) end))
 animTable[name][idx] = {}
 animTable[name][idx].anim = childPart
+local weightObject = childPart:FindFirstChild("Weight")
+if (weightObject == nil) then
+animTable[name][idx].weight = 1
+else
+animTable[name][idx].weight = weightObject.Value
+end
+animTable[name].count = animTable[name].count + 1
+animTable[name].totalWeight = animTable[name].totalWeight + animTable[name][idx].weight
+print(name .. " [" .. idx .. "] " .. animTable[name][idx].anim.AnimationId .. " (" .. animTable[name][idx].weight .. ")")
+idx = idx + 1
+end
+end
+end
+
+-- fallback to defaults
+if (animTable[name].count <= 0) then
+for idx, anim in pairs(fileList) do
+animTable[name][idx] = {}
+animTable[name][idx].anim = Instance.new("Animation")
+animTable[name][idx].anim.Name = name
+animTable[name][idx].anim.AnimationId = anim.id
+animTable[name][idx].weight = anim.weight
+animTable[name].count = animTable[name].count + 1
+animTable[name].totalWeight = animTable[name].totalWeight + anim.weight
+print(name .. " [" .. idx .. "] " .. anim.id .. " (" .. anim.weight .. ")")
+end
+end
+end
+function scriptChildModified(child)
+local fileList = animNames[child.Name]
+if (fileList ~= nil) then
+configureAnimationSet(child.Name, fileList)
+end
+end
+
+script.ChildAdded:connect(scriptChildModified)
+script.ChildRemoved:connect(scriptChildModified)
+
+
+for name, fileList in pairs(animNames) do 
+configureAnimationSet(name, fileList)
+end

@@ -196,7 +196,6 @@ function keyFrameReachedFunc(frameName)
 if (frameName == "End") then
 
 local repeatAnim = currentAnim
--- return to idle if finishing an emote
 if (emoteNames[repeatAnim] ~= nil and emoteNames[repeatAnim] == false) then
 repeatAnim = "idle"
 end
@@ -209,4 +208,47 @@ end
 
 for name, fileList in pairs(animNames) do 
 configureAnimationSet(name, fileList)
+end
+local roll = math.random(1, animTable[animName].totalWeight) 
+local origRoll = roll
+local idx = 1
+while (roll > animTable[animName][idx].weight) do
+roll = roll - animTable[animName][idx].weight
+idx = idx + 1
+end
+print(animName .. " " .. idx .. " [" .. origRoll .. "]")
+local anim = animTable[animName][idx].anim
+if (anim ~= currentAnimInstance) then
+if (currentAnimTrack ~= nil) then
+currentAnimTrack:Stop(transitionTime)
+currentAnimTrack:Destroy()
+end
+currentAnimSpeed = 1.0
+currentAnimTrack = humanoid:LoadAnimation(anim)
+currentAnimTrack:Play(transitionTime)
+currentAnim = animName
+currentAnimInstance = anim
+if (currentAnimKeyframeHandler ~= nil) then
+currentAnimKeyframeHandler:disconnect()
+end
+currentAnimKeyframeHandler = currentAnimTrack.KeyframeReached:connect(keyFrameReachedFunc)
+end
+end
+local toolAnimName = ""
+local toolAnimTrack = nil
+local toolAnimInstance = nil
+local currentToolAnimKeyframeHandler = nil
+function toolKeyFrameReachedFunc(frameName)
+if (frameName == "End") then
+print("Keyframe : ".. frameName)
+playToolAnimation(toolAnimName, 0.0, Humanoid)
+end
+end
+function playToolAnimation(animName, transitionTime, humanoid) 
+local roll = math.random(1, animTable[animName].totalWeight) 
+local origRoll = roll
+local idx = 1
+while (roll > animTable[animName][idx].weight) do
+roll = roll - animTable[animName][idx].weight
+idx = idx + 1
 end

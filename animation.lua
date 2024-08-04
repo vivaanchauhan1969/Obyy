@@ -5,43 +5,6 @@ while true do
 child = parent.ChildAdded:wait()
 if child.Name==childName then return child end
 end
-print(animName .. " * " .. idx .. " [" .. origRoll .. "]")
-local anim = animTable[animName][idx].anim
-if (toolAnimInstance ~= anim) then
-if (toolAnimTrack ~= nil) then
-toolAnimTrack:Stop()
-toolAnimTrack:Destroy()
-transitionTime = 0
-end
-toolAnimTrack = humanoid:LoadAnimation(anim)
-toolAnimTrack:Play(transitionTime)
-toolAnimName = animName
-toolAnimInstance = anim
-currentToolAnimKeyframeHandler = toolAnimTrack.KeyframeReached:connect(toolKeyFrameReachedFunc)
-end
-end
-function stopToolAnimations()
-local oldAnim = toolAnimName
-if (currentToolAnimKeyframeHandler ~= nil) then
-currentToolAnimKeyframeHandler:disconnect()
-end
-toolAnimName = ""
-toolAnimInstance = nil
-if (toolAnimTrack ~= nil) then
-toolAnimTrack:Stop()
-toolAnimTrack:Destroy()
-toolAnimTrack = nil
-end
-return oldAnim
-end
-function onRunning(speed)
-if speed>0.01 then
-playAnimation("walk", 0.1, Humanoid)
-if currentAnimInstance and currentAnimInstance.AnimationId == "http://www.roblox.com/asset/?id=180426354" then
-setAnimationSpeed(speed / 14.5)
-end
-pose = "Running"
-else
 end
 local Figure = script.Parent
 local Torso = waitForChild(Figure, "Torso")
@@ -289,3 +252,40 @@ while (roll > animTable[animName][idx].weight) do
 roll = roll - animTable[animName][idx].weight
 idx = idx + 1
 end
+print(animName .. " * " .. idx .. " [" .. origRoll .. "]")
+local anim = animTable[animName][idx].anim
+if (toolAnimInstance ~= anim) then
+if (toolAnimTrack ~= nil) then
+toolAnimTrack:Stop()
+toolAnimTrack:Destroy()
+transitionTime = 0
+end
+toolAnimTrack = humanoid:LoadAnimation(anim)
+toolAnimTrack:Play(transitionTime)
+toolAnimName = animName
+toolAnimInstance = anim
+currentToolAnimKeyframeHandler = toolAnimTrack.KeyframeReached:connect(toolKeyFrameReachedFunc)
+end
+end
+function stopToolAnimations()
+local oldAnim = toolAnimName
+if (currentToolAnimKeyframeHandler ~= nil) then
+currentToolAnimKeyframeHandler:disconnect()
+end
+toolAnimName = ""
+toolAnimInstance = nil
+if (toolAnimTrack ~= nil) then
+toolAnimTrack:Stop()
+toolAnimTrack:Destroy()
+toolAnimTrack = nil
+end
+return oldAnim
+end
+function onRunning(speed)
+if speed>0.01 then
+playAnimation("walk", 0.1, Humanoid)
+if currentAnimInstance and currentAnimInstance.AnimationId == "http://www.roblox.com/asset/?id=180426354" then
+setAnimationSpeed(speed / 14.5)
+end
+pose = "Running"
+else

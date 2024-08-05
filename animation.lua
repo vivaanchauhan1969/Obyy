@@ -382,3 +382,40 @@ local setAngles = false
   if (jumpAnimTime > 0) then
   jumpAnimTime = jumpAnimTime - deltaTime
   end
+
+if (pose == "FreeFall" and jumpAnimTime <= 0) then
+playAnimation("fall", fallTransitionTime, Humanoid)
+elseif (pose == "Seated") then
+playAnimation("sit", 0.5, Humanoid)
+return
+elseif (pose == "Running") then
+playAnimation("walk", 0.1, Humanoid)
+elseif (pose == "Dead" or pose == "GettingUp" or pose == "FallingDown" or pose == "Seated" or pose == "PlatformStanding") then
+stopAllAnimations()
+amplitude = 0
+frequency = 0
+setAngles = true
+end
+if (setAngles) then
+local desiredAngle = amplitude * math.sin(time * frequency)
+end
+local tool = getTool()
+if tool and tool:FindFirstChild("Handle") then
+local animStringValueObject = getToolAnim(tool)
+if animStringValueObject then
+toolAnim = animStringValueObject.Value
+animStringValueObject.Parent = nil
+toolAnimTime = time + 0.3
+end
+if time > toolAnimTime then
+toolAnimTime = 0
+toolAnim = "None"
+end
+animateTool()
+else
+stopToolAnimations()
+toolAnim = "None"
+toolAnimInstance = nil
+toolAnimTime = 0
+end
+end

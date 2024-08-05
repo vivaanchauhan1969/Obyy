@@ -41,3 +41,39 @@ if Child and Child:IsA("Humanoid")and Child.Health>0.001 then
 BlockageHumanoid=Child;
 end;
 end;
+if Blockage and Blockage:IsA("Terrain")then
+local CellPos=Blockage:WorldToCellPreferSolid((BlockagePos-Vector3.new(0,2,0)));
+local CellMaterial,CellShape,CellOrientation=Blockage:GetCell(CellPos.X,CellPos.Y,CellPos.Z);
+if CellMaterial==Enum.CellMaterial.Water then
+end
+elseif BlockageHumanoid or Blockage.ClassName=="TrussPart"or Blockage.ClassName=="WedgePart"or Blockage.Name=="Handle"and Blockage.Parent:IsA("Hat")or Blockage.Name=="Handle"and Blockage.Parent:IsA("Tool")then
+end;
+end;
+if AdamScript and Adam and AdamHumanoid and AdamHumanoid.Health>0.001 and not AdamHumanoid.Sit and Jumpable then
+end;
+end;
+if AdamScript and Adam and AdamHumanoid and AdamHumanoid.Health>0.001 and not AdamHumanoid.AutoJumpEnabled then
+end;
+if AdamScript and Adam and AdamHumanoid and AdamHumanoid.Health>0.001 and not AdamHumanoid.AutoRotate then
+end;
+if AdamScript and Adam and AdamHumanoid and AdamHumanoid.Health>0.001 and AdamHumanoid.PlatformStand then
+end;
+if AdamScript and Adam and AdamHumanoid and AdamHumanoid.Health>0.001 and AdamHumanoid.Sit then
+end;
+if AdamScript and Adam and AdamHumanoid and AdamHumanoid.Health>0.001 then
+end;
+local NoticeDistance=0;
+for _,TargetModel in pairs(Game:GetService("Workspace"):GetChildren())do
+if TargetModel and TargetModel:IsA("Model")and TargetModel~=Adam and TargetModel.Name~=Adam.Name and TargetModel:FindFirstChild("Head")and TargetModel:FindFirstChild("Torso")and not HasGear then
+local TargetPart=TargetModel:FindFirstChild("Torso");
+local FoundHumanoid;
+local FoundGear;
+for _,Child in pairs(TargetModel:GetChildren())do
+if Child and Child:IsA("Humanoid")and Child.Health>0.001 then
+FoundHumanoid=Child;
+end;
+end;
+for _,Child in pairs(TargetModel:GetChildren())do
+if Child and Child:IsA("Tool")then
+FoundGear=Child
+end

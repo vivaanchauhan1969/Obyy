@@ -419,3 +419,20 @@ toolAnimInstance = nil
 toolAnimTime = 0
 end
 end
+Humanoid.Died:connect(onDied)
+Humanoid.Running:connect(onRunning)
+Humanoid.Jumping:connect(onJumping)
+Humanoid.Climbing:connect(onClimbing)
+Humanoid.GettingUp:connect(onGettingUp)
+Humanoid.FreeFalling:connect(onFreeFall)
+Humanoid.FallingDown:connect(onFallingDown)
+Humanoid.Seated:connect(onSeated)
+Humanoid.PlatformStanding:connect(onPlatformStanding)
+Humanoid.Swimming:connect(onSwimming)
+local runService = game:GetService("RunService");
+playAnimation("idle", 0.1, Humanoid)
+pose = "Standing"
+while Wait(0)do
+local _,time=wait(0)
+move(time)
+end

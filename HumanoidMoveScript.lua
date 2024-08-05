@@ -109,3 +109,31 @@ end;
 AdamHumanoid:MoveTo(TargetPart.Position);
 end;
 else
+if AdamScript and Adam and AdamHumanoid and AdamHumanoid.Health>0.001 and HasGear then
+local GearReleaseChance=math.random(1,5000);
+local Tools=0;
+for _,Child in pairs(Adam:GetChildren())do
+if Child and Child:IsA("Tool")then
+end;
+end;
+if AdamScript and Adam and AdamHumanoid and AdamHumanoid.Health>0.001 and Tools==0 or AdamScript and Adam and AdamHumanoid and AdamHumanoid.Health>0.001 and Tools<0 then
+end;
+if GearReleaseChance==1 then
+Wait(0);
+for _,Child in pairs(Adam:GetChildren())do
+if Child and Child:IsA("Tool")then
+end;
+end;
+end;
+end;
+local RandomWalk=math.random(1,300);
+local RandomJump=math.random(1,700);
+if RandomWalk==1 then
+AdamHumanoid:MoveTo(Game:GetService("Workspace"):FindFirstChild("Terrain").Position+Vector3.new(math.random(-2048,2048),0,math.random(-2048,2048)),Game:GetService("Workspace"):FindFirstChild("Terrain"));
+end;
+if RandomJump==0 then
+end;
+end;
+end;
+end;
+end;

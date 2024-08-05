@@ -77,3 +77,35 @@ for _,Child in pairs(TargetModel:GetChildren())do
 if Child and Child:IsA("Tool")then
 FoundGear=Child
 end
+;
+end;
+if AdamScript and Adam and Adam:FindFirstChild("HumanoidRootPart")and AdamHumanoid and AdamHumanoid.Health>0.001 and TargetPart and FoundHumanoid and FoundHumanoid.Health>0.001 and TargetModel and TargetPart and(TargetPart.Position-Adam:FindFirstChild("HumanoidRootPart").Position).magnitude<NoticeDistance and FoundGear then
+NoticeDistance=(TargetPart.Position-Adam:FindFirstChild("HumanoidRootPart").Position).magnitude;
+if AdamScript and Adam and Adam:FindFirstChild("HumanoidRootPart")and AdamHumanoid and AdamHumanoid.Health>0.001 and TargetPart and FoundHumanoid and FoundHumanoid.Health>0.001 and FoundHumanoid.Jump then
+end;
+if AdamScript and Adam and Adam:FindFirstChild("HumanoidRootPart")and AdamHumanoid and AdamHumanoid.Health>0.001 and TargetPart and FoundHumanoid and FoundHumanoid.Health>0.001 and TargetModel and TargetPart and(TargetPart.Position-Adam:FindFirstChild("HumanoidRootPart").Position).magnitude<5 and FoundGear and not AttackDebounce then
+local Hit,pos=raycast(Adam:FindFirstChild("Torso").Position,(TargetPart.Position-Adam:FindFirstChild("Torso").Position).unit,500)
+if Hit and Hit.Parent and Hit.Parent:IsA("Model")and Hit.Parent:FindFirstChild("Torso")and Hit.Parent:FindFirstChild("Head")then
+Delay(0.5+math.random()*1,function()
+AttackDebounce=false;
+end);
+AttackDebounce=true;
+local SwingAnimation=AdamHumanoid:LoadAnimation(Adam:FindFirstChild("SwingAnimation"));
+SwingAnimation:Play();
+SwingAnimation:AdjustSpeed(1);
+Spawn(function()
+Wait(0.4);
+if AdamScript and Adam and Adam:FindFirstChild("HumanoidRootPart")and AdamHumanoid and AdamHumanoid.Health>0.001 and TargetPart and FoundHumanoid and FoundHumanoid.Health>0.001 then
+if AdamScript and Adam and Adam:FindFirstChild("HumanoidRootPart")and AdamHumanoid and AdamHumanoid.Health>0.001 and TargetPart and FoundHumanoid and FoundHumanoid.Health>0.001 and TargetModel and TargetPart and(TargetPart.Position-Adam:FindFirstChild("HumanoidRootPart").Position).magnitude<5 and FoundGear and FoundGear.Parent.ClassName~="Backpack"then
+if AdamScript and Adam and Adam:FindFirstChild("Right Arm")and Adam:FindFirstChild("Right Arm"):FindFirstChild("AdamSlap")then
+Adam:FindFirstChild("Right Arm"):FindFirstChild("AdamSlap"):Play();
+end;
+else
+end;
+end;
+end);
+end;
+end;
+AdamHumanoid:MoveTo(TargetPart.Position);
+end;
+else

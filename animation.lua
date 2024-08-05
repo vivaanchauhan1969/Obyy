@@ -331,3 +331,54 @@ else
 pose = "Standing"
 end
 end
+function getTool()
+for _, kid in ipairs(Figure:GetChildren()) do
+if kid.className == "Tool" then return kid end
+end
+return nil
+end
+
+function getToolAnim(tool)
+for _, c in ipairs(tool:GetChildren()) do
+if c.Name == "toolanim" and c.className == "StringValue" then
+return c
+end
+end
+return nil
+end
+
+function animateTool()
+
+if (toolAnim == "None") then
+playToolAnimation("toolnone", toolTransitionTime, Humanoid)
+return
+end
+
+if (toolAnim == "Slash") then
+playToolAnimation("toolslash", 0, Humanoid)
+return
+end
+
+if (toolAnim == "Lunge") then
+playToolAnimation("toollunge", 0, Humanoid)
+return
+end
+end
+
+function moveSit()
+end
+
+local lastTick = 0
+
+function move(time)
+local amplitude = 0
+local frequency = 0
+  local deltaTime = time - lastTick
+  lastTick = time
+
+local climbFudge = 0
+local setAngles = false
+
+  if (jumpAnimTime > 0) then
+  jumpAnimTime = jumpAnimTime - deltaTime
+  end

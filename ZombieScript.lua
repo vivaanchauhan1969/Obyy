@@ -47,3 +47,59 @@ local BodyColors=waitForChild(sp,"Body Colors")
 local pose="Standing"
 local hitsound=waitForChild(Head,"Bite Bark")
 local BARKING=waitForChild(Head,"Seal Barking")
+
+local sounds={
+	waitForChild(Torso,"GroanSound"),
+	waitForChild(Torso,"RawrSound")
+}
+
+if healthregen then
+	local regenscript=waitForChild(sp,"HealthRegenerationScript")
+	regenscript.Disabled=false
+end
+Humanoid.WalkSpeed=wonderspeed
+
+local toolAnim="None"
+local toolAnimTime=0
+
+BodyColors.HeadColor=BrickColor.new("Grime")
+local randomcolor1=colors[math.random(1,#colors)]
+BodyColors.TorsoColor=BrickColor.new(randomcolor1)
+BodyColors.LeftArmColor=BrickColor.new(randomcolor1)
+BodyColors.RightArmColor=BrickColor.new(randomcolor1)
+local randomcolor2=colors[math.random(1,#colors)]
+BodyColors.LeftLegColor=BrickColor.new(randomcolor2)
+BodyColors.RightLegColor=BrickColor.new(randomcolor2)]]
+
+
+function onRunning(speed)
+	if speed>0 then
+		pose="Running"
+	else
+		pose="Standing"
+	end
+end
+function onDied()
+	pose="Dead"
+end
+function onJumping()
+	pose="Jumping"
+end
+function onClimbing()
+	pose="Climbing"
+end
+function onGettingUp()
+	pose = "GettingUp"
+end
+function onFreeFall()
+	pose = "FreeFall"
+end
+function onFallingDown()
+	pose = "FallingDown"
+end
+function onSeated()
+	pose = "Seated"
+end
+function onPlatformStanding()
+	pose = "PlatformStanding"
+end

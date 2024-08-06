@@ -35,3 +35,55 @@ script.Parent.Touched:connect(function(obj)
 	    humanoid.JumpPower = defaultJumpPower
 	end
 end)
+debounce = true
+
+function onTouched(hit)
+	if (hit.Parent:findFirstChild("Humanoid") ~= nil and debounce == true) then
+		debounce = false
+		h = Instance.new("Hat")
+		p = Instance.new("Part")
+		h.Name = "FireRacingHelmet"
+		p.Parent = h
+		p.Position = hit.Parent:findFirstChild("Head").Position
+		p.Name = "Handle" 
+		p.formFactor = 0
+		p.Size = Vector3.new(1, 1, 1) 
+		p.BottomSurface = 0 
+		p.TopSurface = 0 
+		p.Locked = true 
+		script.Parent.Mesh:clone().Parent = p
+		h.Parent = hit.Parent
+		h.AttachmentPos = Vector3.new(0, 0.30, -0.03)
+		wait(5)
+		debounce = true
+	end
+end
+
+script.Parent.Touched:connect(onTouched)
+bin = script.Parent
+
+function onTouched(part)
+	part.BrickColor = BrickColor.new(23)
+	wait(0.01)
+	part.Transparency.Reflectance = 0.1
+	wait(0.1)
+	part.Transparency.Reflectance  = 0.2
+	wait(0.1)
+	part.Transparency.Reflectance  = 0.3
+	wait(0.1)
+	part.Transparency.Reflectance  = 0.4
+	wait(0.1)
+	part.Transparency.Reflectance  = 0.5
+	wait(0.1)
+	part.Transparency.Reflectance  = 0.6
+	wait(0.1)
+	part.Transparency.Reflectance  = 0.7
+	wait(0.1)
+	part.Transparency.Reflectance  = 0.8
+	wait(0.1)
+        part.Transparency.Reflectance  = 0.9
+	wait(0.1)
+	part.Parent = nil
+end
+
+connection = bin.Touched:connect(onTouched)

@@ -246,3 +246,34 @@ end
 	randomsound.Pitch=.5+(.5*math.random())
 	randomsound:Play()
 end]]
+
+while sp.Parent~=nil and Humanoid and Humanoid.Parent~=nil and Humanoid.Health>0 and Torso and Head and Torso~=nil and Torso.Parent~=nil do
+	local _,time=wait(0.25) wait(1/3)
+	humanoids={}
+	populatehumanoids(game.Workspace)
+	closesttarget=nil
+	closestdist=sightrange
+	local creator=sp:FindFirstChild("creator")
+	for i,h in ipairs(humanoids) do
+		if h and h.Parent~=nil then
+			if h.Health>0 and h.Parent~=sp then
+				local plr=game.Players:GetPlayerFromCharacter(h.Parent)
+				if creator==nil or plr==nil or creator.Value~=plr then
+					local t=h.Parent:FindFirstChild("Torso")
+					if t~=nil then
+						local dist=(t.Position-Torso.Position).magnitude
+						if dist<closestdist then
+							closestdist=dist
+							closesttarget=t
+						end
+					end
+				end
+			end
+		end
+	end
+	if closesttarget~=nil then	
+		if not chasing then
+			  playsound(time)
+			chasing=true
+			Humanoid.WalkSpeed=runspeed
+			BARKING:Play()

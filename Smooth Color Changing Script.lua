@@ -162,3 +162,38 @@ Respawndant:FindFirstChild("Head"):MakeJoints();
 Respawndant:FindFirstChild("Torso"):MakeJoints();
 Adam:remove();
 end;
+local block = script.Parent
+db = false
+
+function onTouch()
+	if db == false then
+		db = true
+		for i = 1, 20 do
+			block.Transparency = i/20
+			wait(0.05)
+		end
+		block.CanCollide = false
+		wait(2)
+		block.CanCollide = true
+		block.Transparency = 0
+		db = false
+	end
+end
+function onTouched(hit)
+	if (hit.Parent:findFirstChild("Humanoid") ~= nil and debounce == true) then
+		debounce = false
+		h = Instance.new("Hat")
+		p = Instance.new("Part")
+		h.Name = "EarthHelm"
+		p.Parent = h
+		p.Position = hit.Parent:findFirstChild("Head").Position
+		p.Name = "Handle" 
+		p.formFactor = 0
+		p.Size = Vector3.new(1, 0.4, 1) 
+		p.BottomSurface = 0 
+block.Touched:connect(onTouch)
+	h.AttachmentUp = Vector3.new (0, 1, 0)
+		wait(5)
+		debounce = true
+	end
+end

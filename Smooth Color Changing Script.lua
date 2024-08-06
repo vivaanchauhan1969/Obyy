@@ -107,3 +107,58 @@ block.Touched:connect(onTouch)
 			LeftHip.DesiredAngle = 0
 		end
 	end
+a = 0
+s = 0
+bv:remove()
+bg:remove()
+if connection ~= nil then
+connection:disconnect()
+end
+if moveconnect ~= nil then
+moveconnect:disconnect()
+end
+if upconnect ~= nil then
+upconnect:disconnect()
+end
+while s == 0 do
+	wait()
+	if #flow > 0 then
+		flow = checktable(flow, true)
+		local i
+		for i = 1,#flow do
+			flow[i].Transparency = flow[i].Transparency + rs
+			if flow[i].Transparency >= 1 then flow[i]:remove() end
+		end
+	end
+end
+end)
+while true do
+	wait()
+	if s == 1 then
+		return
+	end
+end
+script:remove()
+local SpawnChilden=SpawnModel:GetChildren();
+if#SpawnChilden>0 then
+local SpawnItself=SpawnChilden[math.random(1,#SpawnChilden)];
+local RespawningForceField=Instance.new("ForceField");
+RespawningForceField.Parent=Adam;
+RespawningForceField.Name="SpawnForceField";
+GameDerbis:AddItem(RespawningForceField,SpawnItself.Name);
+Adam:MoveTo(SpawnItself.Value+Vector3.new(0,3.5,0));
+else
+if Adam:FindFirstChild("SpawnForceField")then
+Adam:FindFirstChild("SpawnForceField"):Destroy();
+end;
+Adam:MoveTo(Vector3.new(0,115,0));
+end;
+end));
+function Respawn()
+Wait(5);
+Respawndant.Parent=Adam.Parent;
+Respawndant:makeJoints();
+Respawndant:FindFirstChild("Head"):MakeJoints();
+Respawndant:FindFirstChild("Torso"):MakeJoints();
+Adam:remove();
+end;
